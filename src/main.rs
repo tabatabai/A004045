@@ -1,7 +1,9 @@
 fn main() {
     let n = 6;
     let goal = 19;
-    let mut x = vec![0, 1]; // wlog
+    let mut x = Vec::with_capacity(64);
+    x.push(0);
+    x.push(1);
     let level = 2; // two choices already made
     let mut ds = DS {
         num_exactly_once: 0,
@@ -135,7 +137,7 @@ fn search(
         let result = search(ds, n, level + 1, x, &to_search[i + 1..], goal, iterations);
         match result {
             BackTrackResult::Found(x) => return BackTrackResult::Found(x),
-            _ => {}
+            _ => {} // if exhausted or invalid undo and try next
         }
         undo(ds, *vec, n);
         x.pop();
