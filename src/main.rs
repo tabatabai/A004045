@@ -1,7 +1,7 @@
 fn main() {
     let n = 6;
-    let goal = 20;
-    let mut x = vec![0, 1];
+    let goal = 19;
+    let mut x = vec![0, 1]; // wlog
     let level = 2; // two choices already made
     let mut ds = DS {
         num_exactly_once: 0,
@@ -119,6 +119,7 @@ fn search(
     *iterations += 1;
     if *iterations % 134217728 == 0 {
         println!("{}M iterations.", *iterations / 1_000_000);
+        println!("Current solution: {:?}. Depth is {}.", x, level);
     }
     if is_valid(ds, n, level, to_search, goal) {
         if level == goal {
